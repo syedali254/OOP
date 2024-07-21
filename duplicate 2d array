@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+void eliminate_duplicates(int arr[], int&size) {
+    for (int i=0; i<size; ++i) {
+        for (int j =i+1; j<size; ++j) {
+            if (arr[i]==arr[j]) {
+                // duplicate element exists so moving las6t element at 1st
+                for (int k=j; k<size-1; ++k){
+                    arr[k]=arr[k + 1];
+                }
+                size--; // Reduce the size of the array so in the end tells size of updated array
+                j--; // Adjust this inezx here for new iteraton.
+            }
+        }
+    }
+}
+
+int main() {
+    int size;
+    cout<<"Enter size: "<<endl;
+    cin>>size;
+    int arr[size] ;
+    cout<<"Elements :"<<endl;
+    for(int i=0;i<size;i++){
+    	cin>>arr[i];
+	}
+    
+    cout << "Original Array:"<<endl;
+    for (int i=0; i<size; ++i) {
+        cout<<"["<<arr[i]<<"]";
+    }
+    cout << endl;
+
+  
+    eliminate_duplicates(arr, size);
+
+    
+    cout << " Updated Array:" <<endl;
+    for (int i=0; i<size; ++i){
+        cout<<"["<<arr[i]<<"]";
+    }
+    cout <<"\nDistinct integers count: "<<size<<endl;
+
+    return 0;
+}
