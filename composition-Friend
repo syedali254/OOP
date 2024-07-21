@@ -1,0 +1,125 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Class representing Date of Birth
+class DateOfBirth {
+private:
+    int day;
+    int month;
+    int year;
+
+public:
+    // Constructor to initialize Date of Birth
+    DateOfBirth(int d, int m, int y) : day(d), month(m), year(y) {}
+
+    // Method to display Date of Birth
+    void display() {
+        cout << day << "/" << month << "/" << year;
+    }
+
+    // Method to get the month
+    int getMonth() const {
+        return month;
+    }
+};
+
+// Class representing Contact details
+class Contact {
+private:
+    string name;
+    string phoneNumber;
+    string email;
+    DateOfBirth dob; // Date of Birth object
+
+public:
+    // Constructor to initialize Contact
+    Contact(string _name, string _phone, string _email, DateOfBirth _dob)
+        : name(_name), phoneNumber(_phone), email(_email), dob(_dob) {}
+
+    // Method to display contact details
+    void display() {
+        cout << "Name: " << name << endl;
+        cout << "Phone: " << phoneNumber << endl;
+        cout << "Email: " << email << endl;
+        cout << "Date of Birth: ";
+        dob.display();
+        cout << endl;
+    }
+
+    // Method to get the month of birth
+    int getMonth() {
+        return dob.getMonth();
+    }
+};
+
+// Class representing Contact Book
+class ContactBook {
+private:
+    Contact **contacts; // Array of pointers to Contact objects
+    int maxSize; // Maximum size of the contact book
+    int count; // Current number of contacts in the book
+
+public:
+    // Constructor to initalize the size of array and initalize count to 0
+    ContactBook(int _maxSize) : maxSize(_maxSize), count(0) {
+        contacts = new Contact *[maxSize];
+        for (int i = 0; i < maxSize; ++i) {
+            contacts[i] = nullptr; // Initialize all pointers to nullptr initialyy
+        }
+    }
+
+    // Destructor to free memory allocated for contacts
+    ~ContactBook() {
+        for (int i = 0; i < count; ++i) {
+            delete contacts[i]; // Delete each Contact object
+        }
+        delete[] contacts; // Delete the array of pointers
+    }
+
+    // Method to add a new contact dybnamicalyy
+    void addContact(Contact *newContact) {
+        if (count < maxSize) {
+            contacts[count++] = newContact; // Add the new contact and incremnt count
+        } else {
+            cout << "Contact book is full!" << endl;
+        }
+    }
+
+    // Method to print contacts with birthdays in a specific month
+    void printContactsInMonth(int month) {
+        for (int i = 0; i < count; ++i) {
+        	//->operator is used to access members of an object through a pointer to that object.
+                if (contacts[i]->getMonth() == month) { // Check if contact's birth month matches
+                contacts[i]->display(); // Display the contact
+            }
+        }
+    }
+};
+
+int main() {
+    // Creating DateOfBirth objects
+    DateOfBirth dob1(15, 5, 1990);
+    DateOfBirth dob2(20, 7, 1985);
+
+    // Creating Contact objects
+    Contact *contact1 = new Contact("Ali", "123456789", "ali@gmail.com", dob1);
+    Contact *contact2 = new Contact("shahid", "987654321", "shahid@gmail.com", dob2);
+
+    // Creating ContactBook object
+    ContactBook myContacts(100);
+    // Adding contacts to the ContactBook
+    myContacts.addContact(contact1);
+    myContacts.addContact(contact2);
+
+    // Printing contacts with birthday in May
+    cout << "Contacts with birthday in May:" << endl;
+    myContacts.printContactsInMonth(5);
+
+    // Freeing memory by deleting Contact objects
+    delete contact1;
+    delete contact2;
+
+    return 0;
+}
