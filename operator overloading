@@ -1,0 +1,147 @@
+#include<iostream>
+using namespace std;
+
+class value {
+private:
+    int number;
+
+public:
+    value() : number(0) {}
+    value(int values) : number(values) {}
+
+    value operator+(const value &obj) {
+        return value(number + obj.number);
+    }
+  
+    value operator-(const value &obj) {
+        return value(number - obj.number);
+    }
+  
+    value operator*(const value &obj) {
+        return value(number * obj.number);
+    }
+  
+    value operator/(const value &obj) {
+        return value(number / obj.number);
+    }
+  
+    value operator%(const value &obj) {
+        return value(number % obj.number);
+    }
+  
+    value operator==(const value &obj) {
+        return number == obj.number;
+    }
+  
+    value operator!=(const value &obj) {
+        return number != obj.number;
+    }
+  
+    value operator<(const value &obj) {
+        return number < obj.number;
+    }
+  
+    value operator>(const value &obj) {
+        return number > obj.number;
+    }
+  
+    value operator<=(const value &obj) {
+        return number <= obj.number;
+    }
+  
+    value operator>=(const value &obj) {
+        return number >= obj.number;
+    }
+  
+    value operator&&(const value &obj) {
+        return value(number && obj.number);
+    }
+  
+    value operator||(const value &obj) {
+        return value(number || obj.number);
+    }
+  
+    value operator!() {
+        return value(!number);
+    }
+
+    void display() {
+        cout << number << endl;
+    }
+};
+
+int main() {
+    value v1(10);
+    value v2(5);
+    value result;
+
+    result = v1 + v2;
+    cout << "THE RESULT IS ";
+    result.display();
+  
+    result = v1 - v2;
+    cout << "THE RESULT IS ";
+    result.display();
+  
+    result = v1 * v2;
+    cout << "THE RESULT IS ";
+    result.display();
+  
+    result = v1 / v2;
+    cout << "THE RESULT IS ";
+    result.display();
+  
+    result = v1 % v2;
+    cout << "THE RESULT IS ";
+    result.display();
+  
+    // Logical and Comparison operators
+    value v3(10);
+    value v4(20);
+  
+    cout << "v3 == v4 : ";
+    cout << endl << "THE RESULT IS " << endl;
+    value(v3 == v4).display();
+  
+    cout << "v3 != v4 : ";
+    cout << endl << "THE RESULT IS " << endl;
+    value(v3 != v4).display();
+  
+    cout << "v3 < v4  : ";
+    cout << endl << "THE RESULT IS " << endl;
+    value(v3 < v4).display();
+  
+    cout << "v3 > v4  : ";
+    cout << endl << "THE RESULT IS " << endl;
+    value greaterResult(v3 > v4);
+    greaterResult.display();
+  
+    cout << "v3 <= v4 : ";
+    cout << endl << "THE RESULT IS " << endl;
+    value(v3 <= v4).display();
+  
+    cout << "v3 >= v4 : ";
+    value(v3 >= v4).display();
+    
+    value v5(0);
+    value v6(10);
+    cout << "!v5 : ";
+    value(!v5).display();
+  
+    cout << "!v6 : ";
+    value(!v6).display();
+  
+    
+  
+    value v7(1);
+    value v8(0);
+    cout << "(v7 && v8) : ";
+    cout << endl << "THE RESULT IS " << endl;
+    value(v7 && v8).display();
+  
+    cout << "(v7 || v6) : ";
+    cout << endl << "THE RESULT IS " << endl;
+    value(v7 || v8).display();
+  
+    return 0;
+}
